@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "orders")
+@Table(name = "dictionaries")
 public class Dictionary {
 
     @Id
@@ -22,6 +21,7 @@ public class Dictionary {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "dictionary", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Records> entries;
+    @JoinColumn(name = "dictionary_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Record> records;
 }

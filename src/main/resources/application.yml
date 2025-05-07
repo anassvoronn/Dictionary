@@ -1,0 +1,19 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /api
+
+spring:
+  liquibase:
+    enabled: false
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    default-schema: public
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    logging:
+      level:
+        org.hibernate.type.descriptor.sql.BasicBinder: TRACE

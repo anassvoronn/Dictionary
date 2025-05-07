@@ -2,11 +2,10 @@ package org.nastya.dto;
 
 import lombok.Value;
 
-import java.util.List;
-
 @Value
-public class DictionaryDTO {
+public class UpdateRecordDTO {
     Integer id;
+    ShowDictionaryDTO dictionary;
     String name;
-    List<RecordsDTO> entries;
+    String value;
 }

@@ -1,12 +1,11 @@
 package org.nastya.dto;
 
 import lombok.Value;
-import org.nastya.entity.Dictionary;
 
 @Value
-public class RecordsDTO {
+public class ShowRecordDTO {
     Integer id;
-    Dictionary dictionaryId;
+    ShowDictionaryDTO dictionary;
     String name;
     String value;
 }
