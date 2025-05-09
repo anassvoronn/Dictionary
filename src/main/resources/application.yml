@@ -4,6 +4,14 @@ server:
     context-path: /api
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Dictionary?useUnicode=yes&characterEncoding=UTF-8
+    username: postgres
+    password: vampyrrr9712
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
   liquibase:
     enabled: false
     change-log: classpath:db/changelog/db.changelog-master.yaml

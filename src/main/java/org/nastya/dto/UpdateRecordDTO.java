@@ -5,7 +5,7 @@ import lombok.Value;
 @Value
 public class UpdateRecordDTO {
     Integer id;
-    ShowDictionaryDTO dictionary;
+    Integer dictionaryId;
     String name;
     String value;
 }

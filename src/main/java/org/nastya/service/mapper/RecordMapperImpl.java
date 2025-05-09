@@ -35,7 +35,7 @@ public class RecordMapperImpl implements RecordMapper {
     public Record mapToEntity(UpdateRecordDTO dto) {
         Record record = new Record();
         record.setId(dto.getId());
-        record.setDictionaryId(dto.getDictionary().getId());
+        record.setDictionaryId(dto.getDictionaryId());
         record.setName(dto.getName());
         record.setValue(dto.getValue());
         return record;

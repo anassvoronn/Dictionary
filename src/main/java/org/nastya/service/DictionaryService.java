@@ -11,6 +11,7 @@ import org.nastya.entity.Record;
 import org.nastya.repository.DictionaryRepository;
 import org.nastya.repository.RecordRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,14 +24,16 @@ public class DictionaryService {
     private final RecordMapper recordMapper;
     private final DictionaryMapper dictionaryMapper;
 
+    @Transactional
     public List<ShowDictionaryDTO> getAllDictionaries() {
         log.info("Fetching all dictionaries");
         List<Dictionary> dictionaries = dictionaryRepository.findAll();
         return dictionaryMapper.mapToDTO(dictionaries);
     }
 
+    @Transactional
     public void saveRecord(UpdateRecordDTO dto) {
-        Integer dictionaryId = dto.getDictionary().getId();
+        Integer dictionaryId = dto.getDictionaryId();
         Integer recordId = dto.getId();
 
         log.info("Validation of {} ", dto);
@@ -45,11 +48,13 @@ public class DictionaryService {
         log.info("Record saved successfully: {}", record);
     }
 
+    @Transactional
     public void deleteRecord(Integer id) {
         log.info("Deleting record with id={}", id);
         recordRepository.deleteById(id);
     }
 
+    @Transactional
     public ShowRecordDTO searchRecordByName(String keyword, Integer dictionaryId) {
         log.info("Searching records with name '{}'", keyword);
         return recordRepository.findByNameAndDictionaryId(keyword, dictionaryId)
