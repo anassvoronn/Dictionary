@@ -1,0 +1,12 @@
+Configure the database in application.yml:
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Dictionary?useUnicode=yes&characterEncoding=UTF-8
+    username: postgres
+    password: vampyrrr9712
+
+Run the application:
+java -jar Dictionary-0.0.1-SNAPSHOT.jar
+
+Open Swagger UI:
+Go to http://localhost:8080/api/swagger-ui/index.html to explore the API.
