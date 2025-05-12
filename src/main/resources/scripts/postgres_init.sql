@@ -20,10 +20,10 @@ INSERT INTO public.dictionaries (name) VALUES
 ('Animals');
 
 INSERT INTO public.records (dictionary_id, name, value) VALUES
-(1, 'China', 'population: 200 million; currency: CN'),
-(1, 'Canada', 'population: 120 million; currency: DC'),
-(2, 'Cat', 'color: orange'),
-(2, 'Dog', 'color: black');
+(1, 'China', '{"population": 1400000000, "capital": "Beijing", "currency": "Yuan"}'),
+(1, 'Canada', '{"population": 38000000, "capital": "Ottawa", "currency": "Canadian Dollar"}'),
+(2, 'Cat', '{"species": "Felis catus", "lifespan": 15, "diet": "Carnivore"}'),
+(2, 'Dog', '{"species": "Canis lupus familiaris", "lifespan": 13, "diet": "Omnivore"}');
 
 ALTER TABLE ONLY public.dictionaries
     ADD CONSTRAINT unique_dictionary_name UNIQUE (name);
