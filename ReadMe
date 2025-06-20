@@ -1,20 +1,63 @@
-Configure the database in application.yml:
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/Dictionary?useUnicode=yes&characterEncoding=UTF-8
-    username: postgres
-    password: vampyrrr9712
+# Dictionary Application
+-----------------------------------------------------------
+Run with Docker:
 
-Run the application:
-java -jar Dictionary-0.0.1-SNAPSHOT.jar
+1. Create a Docker network:
+   docker network create dictionary-network
 
-Open Swagger UI:
-Go to http://localhost:8080/api/swagger-ui/index.html to explore the API.
+2. Build the project:
+   mvn clean install
 
-Run the docker:
-1. docker network create dictionary-network
-2. mvn clean install
-3. docker run --name dictionary-postgres --network dictionary-network -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=vampyrrr9712 -e POSTGRES_DB=Dictionary -p 5432:5432 -d postgres:latest
-4. docker build -t dictionary-app .
-5. docker run --name pgadmin -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@example.com -e PGADMIN_DEFAULT_PASSWORD=admin123 --network dictionary-network -d dpage/pgadmin4
-6. docker run --name dictionary-app --network dictionary-network -e SPRING_DATASOURCE_URL="jdbc:postgresql://dictionary-postgres:5432/Dictionary" -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=vampyrrr9712 -p 8080:8080 -d dictionary-app
+3. Start PostgreSQL container:
+   docker run --name dictionary-postgres --network dictionary-network \
+     -e POSTGRES_USER=postgres \
+     -e POSTGRES_PASSWORD=vampyrrr9712 \
+     -e POSTGRES_DB=Dictionary \
+     -p 5432:5432 -d postgres:latest
+
+4. Build the application Docker image:
+   docker build -t dictionary-app .
+
+5. Start pgAdmin container:
+   docker run --name pgadmin -p 5050:80 \
+     -e PGADMIN_DEFAULT_EMAIL=admin@example.com \
+     -e PGADMIN_DEFAULT_PASSWORD=admin123 \
+     --network dictionary-network -d dpage/pgadmin4
+
+6. Start the application container:
+   docker run --name dictionary-app --network dictionary-network \
+     -e SPRING_DATASOURCE_URL="jdbc:postgresql://dictionary-postgres:5432/Dictionary" \
+     -e SPRING_DATASOURCE_USERNAME=postgres \
+     -e SPRING_DATASOURCE_PASSWORD=vampyrrr9712 \
+     -p 8080:8080 -d dictionary-app
+
+7. Open Swagger UI:
+   http://localhost:8080/api/swagger-ui/index.html
+
+8. Access pgAdmin:
+   http://localhost:5050
+    - username: admin@example.com
+    - password: admin123
+
+9. Connect pgAdmin to PostgreSQL:
+    - Host: dictionary-postgres
+    - Port: 5432
+    - Username: postgres
+    - Password: vampyrrr9712
+
+-----------------------------------------------------------
+
+Run without Docker (The database has to be installed locally in advanced):
+
+1. Configure the database in application.yml:
+   spring:
+     datasource:
+       url: jdbc:postgresql://localhost:5432/Dictionary?useUnicode=yes&characterEncoding=UTF-8
+       username: postgres
+       password: vampyrrr9712
+
+2. Run the application:
+   java -jar Dictionary-0.0.1-SNAPSHOT.jar
+
+3. Open Swagger UI:
+   http://localhost:8080/api/swagger-ui/index.html
