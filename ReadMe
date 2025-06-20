@@ -42,6 +42,7 @@ Run with Docker:
 9. Connect pgAdmin to PostgreSQL:
     - Host: dictionary-postgres
     - Port: 5432
+    - Database: Dictionary
     - Username: postgres
     - Password: vampyrrr9712
 
