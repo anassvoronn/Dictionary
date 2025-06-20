@@ -15,18 +15,7 @@ Run the docker:
 1. docker network create dictionary-network
 2. cd .\Vampyrrr\Dictionary\
 3. mvn clean install
-4. docker build -t dictionary-app .
-5. docker run --name dictionary-app `
-   --network dictionary-network `
-   -e SPRING_DATASOURCE_URL="jdbc:postgresql://dictionary-postgres:5432/Dictionary" `
-   -e SPRING_DATASOURCE_USERNAME=postgres `
-   -e SPRING_DATASOURCE_PASSWORD=vampyrrr9712 `
-   -p 8080:8080 `
-   -d dictionary-app
-6. docker run --name pgadmin `
-   -p 5050:80 `
-   -e PGADMIN_DEFAULT_EMAIL=admin@example.com `
-   -e PGADMIN_DEFAULT_PASSWORD=admin123 `
-   --network dictionary-network `
-   -d dpage/pgadmin4
-7. docker network inspect dictionary-network
+4. docker run --name dictionary-postgres --network dictionary-network -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=vampyrrr9712 -e POSTGRES_DB=Dictionary -p 5432:5432 -d postgres:latest
+5. docker build -t dictionary-app .
+6. docker run --name pgadmin -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@example.com -e PGADMIN_DEFAULT_PASSWORD=admin123 --network dictionary-network -d dpage/pgadmin4
+7. docker run --name dictionary-app --network dictionary-network -e SPRING_DATASOURCE_URL="jdbc:postgresql://dictionary-postgres:5432/Dictionary" -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=vampyrrr9712 -p 8080:8080 -d dictionary-app
