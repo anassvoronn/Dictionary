@@ -5,9 +5,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/Dictionary?useUnicode=yes&characterEncoding=UTF-8
-    username: postgres
-    password: vampyrrr9712
+    url: ${SPRING_DATASOURCE_URL}?useUnicode=yes&characterEncoding=UTF-8
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
